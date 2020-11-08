@@ -7,13 +7,25 @@ const API_URL = `https://geo.ipify.org/api/v1?apiKey=${API_KEY}`;
 
 function App() {
 
+  const [IpAddress, setIpAddress] = useState('');
+  const [timezone, setTimezone] = useState('');
+  const [location, setLocation] = useState('');
+  const [isp, setIsp] = useState('');
+
   useEffect(() => {
     //Here; side-effect code => makes things outside the scope of the function component
 
     //Typically: an HTTP request to fetch data from an API
 
-    axios.get('')
-  });
+    axios.get(API_URL)
+      .then(response => {
+        const { ip, isp, location: { city, postalCode, country, timezone } } = response.data;
+        setIpAddress(ip);
+        setTimezone(timezone);
+        setLocation(`${city}, ${country}, ${postalCode}`);
+        setIsp(isp)
+      })
+  }, []); //No dependencies => called only on the first rendering 
 
   return (
     <div className="App">
@@ -22,19 +34,19 @@ function App() {
       <div className="address">
         <div className="address__item">
           <span>ip address</span>
-          <p>192.212.174.101</p>
+          <p>{IpAddress}</p>
         </div>
         <div className="address__item">
           <span>location</span>
-          <p>Paris</p>
+          <p>{location}</p>
         </div>
         <div className="address__item">
           <span>timezone</span>
-          <p>UTC -05:00</p>
+          <p>{timezone}</p>
         </div>
         <div className="address__item">
           <span>isp</span>
-          <p>From home</p>
+          <p>{isp}</p>
         </div>
       </div>
     </div>
