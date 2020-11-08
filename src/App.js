@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
+
+  useEffect(() => {
+    //Here; side-effect code => makes things outside the scope of the function component
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>IP Adress Tracker</h1>
+
+      <div className="address">
+        <div className="address__item">
+          <span>ip address</span>
+          <p>192.212.174.101</p>
+        </div>
+        <div className="address__item">
+          <span>location</span>
+          <p>Paris</p>
+        </div>
+        <div className="address__item">
+          <span>timezone</span>
+          <p>UTC -05:00</p>
+        </div>
+        <div className="address__item">
+          <span>isp</span>
+          <p>From home</p>
+        </div>
+      </div>
     </div>
   );
 }
